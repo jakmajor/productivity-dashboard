@@ -4,6 +4,9 @@ const cityName = "San Francisco";
 
 const fitQuotesBaseUrl = 'https://type.fit/api/quotes';
 
+const holidayApiBaseUrl = "https://holidayapi.com/v1/holidays"; 
+const holidayApiKey = "92d100ea-4e77-4b45-b28a-682473508999"; 
+
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 const init = () => {
@@ -44,10 +47,27 @@ const init = () => {
   const dayOfMonth = date.getDate();
   const month = months[date.getMonth()];
 
+
   // set innerText to dayOfMonth and month
   dayOfMonthTag.innerText = dayOfMonth; 
   monthTag.innerText = month;
 
+  const renderCurrentHoliday = (holidaysObj) => {
+    if (holidaysObj.holidays.length === 0) {
+      holidayTag.innerText = 'no holidays today';
+    } else {
+      holidayTag.innerText = holidaysObj.holidays[0].name;
+    }
+  }
+
+  // Populate holiday 
+  // https://holidayapi.com/v1/holidays?pretty&key=92d100ea-4e77-4b45-b28a-682473508999&country=US&year=2020
+  fetch(`${holidayApiBaseUrl}?pretty&key=${holidayApiKey}&country=US&year=2020&month=${date.getMonth()+1}&day=${dayOfMonth}`)
+  .then(response => response.json())
+  .then(json => {
+    renderCurrentHoliday(json);
+  });
+  
   // function to render weather info
   const renderWeather = (weatherDataObj) => { 
     
