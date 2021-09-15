@@ -4,11 +4,16 @@ const cityName = "Boston";
 
 const fitQuotesBaseUrl = 'https://type.fit/api/quotes';
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 const init = () => {
   // grab all necessary html elements
   const submitTaskFormTag = document.querySelector("#task-submit-btn");
   const toDoListTag = document.querySelector("#to-do-list");
   const createToDoInput = document.querySelector('#task-input-box')
+  const dayOfMonthTag = document.querySelector('#day-of-month');
+  const monthTag = document.querySelector('#month');
+  const holidayTag = document.querySelector('#holiday');
 
   const submitNewTaskHandler = (event) => {
     // prevent page refreshing
@@ -34,6 +39,16 @@ const init = () => {
 
   submitTaskFormTag.addEventListener("click", submitNewTaskHandler);
 
+  // create a date instance using the Date contructor function
+  const date = new Date();
+  const dayOfMonth = date.getDate();
+  const month = months[date.getMonth()];
+
+  // set innerText to dayOfMonth and month
+  dayOfMonthTag.innerText = dayOfMonth; 
+  monthTag.innerText = month;
+
+  // function to render weather info
   const renderWeather = (weatherDataObj) => {
     // grab temperature tag and set its innerText
     const tempTag = document.querySelector("#temp");
