@@ -33,6 +33,10 @@ body {
 
 .daily-tasks-header {
     color: #F3F3F3;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
 .to-do-wrapper {
@@ -64,9 +68,33 @@ body {
 
 }
 
-
 #task-submit-btn {
     cursor: pointer;
     margin-left: 10px;
     margin-bottom: -12px;
+}
+
+#quote-text {
+    font-size: 30px;
+    line-height: 51px;
+    letter-spacing: 0.03em;
+    color: #000000;
+}
+
+#deco-line {
+    border: 1px solid #FFAAA0;
+    width: 55px;
+    height: 0px;
+    border-radius: 10px;
+    margin-top: -22px;
+}
+
+#quote-author {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+    color: #0C424B;
+
 }

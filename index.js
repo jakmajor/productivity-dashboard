@@ -58,7 +58,7 @@ const init = () => {
     // grab quote elements and set innerText
     const quoteTextTag = document.querySelector('#quote-text');
     const quoteAuthorTag = document.querySelector('#quote-author');
-    quoteTextTag.innerText = quoteText;
+    quoteTextTag.innerText = `"${quoteText}"`;
     quoteAuthorTag.innerText = quoteAuthor;
   };
 
