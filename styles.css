@@ -1,24 +1,72 @@
-body{
-    margin: 0px !important;
-    padding: 0px !important;
+* {
+  font-family: "Urbanist", sans-serif;
+}
+
+body {
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 .big-bg {
-    background-color: lightblue;
-    padding-top: 100px;
-    padding-bottom: 100px; 
-    height: 100vh;
+  background-color: lightblue;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  height: 100vh;
 }
 
 .widget {
-    background-color: white; 
-    border-radius: 15px;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .dark-col {
-    background-color: lightcoral;
-    border-radius: 10px;
-    padding: 30px; 
-    margin-top: 14px; 
-    margin-bottom: 14px;
+  background-color: lightcoral;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+#to-do-list-container {
+    background-color: #0C424B;
+    
+}
+
+.daily-tasks-header {
+    color: #F3F3F3;
+}
+
+.to-do-wrapper {
+  display: flex;
+  cursor: pointer;
+}
+
+.to-do-icon {
+  margin-right: 10px;
+}
+
+.to-do-text {
+    color: #F3F3F3;
+}
+
+#task-input-box {
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 1px solid #F3F3F3;
+    padding: 10px 0px;
+    color: #F3F3F3;
+}
+
+#task-input-box::placeholder {
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.65);
+
+}
+
+
+#task-submit-btn {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: -12px;
 }
