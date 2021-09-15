@@ -1,6 +1,6 @@
 const weatherApiBaseUrl = "http://api.weatherapi.com/v1";
 const weatherApiKey = "29dea821b02e4088a1712806211409";
-const cityName = "Boston";
+const cityName = "San Francisco";
 
 const fitQuotesBaseUrl = 'https://type.fit/api/quotes';
 
@@ -49,11 +49,14 @@ const init = () => {
   monthTag.innerText = month;
 
   // function to render weather info
-  const renderWeather = (weatherDataObj) => {
+  const renderWeather = (weatherDataObj) => { 
+    
+    const weatherIconTag = document.querySelector('#weather-icon');
+    weatherIconTag.src = `http:${weatherDataObj.current.condition.icon}`;
     // grab temperature tag and set its innerText
     const tempTag = document.querySelector("#temp");
     tempTag.innerText = Math.round(weatherDataObj.current.temp_f) + "°F";
-
+    
     // save temperature condition into variable
     // const tempCondition = weatherDataObj.current.condition.text;
   };
