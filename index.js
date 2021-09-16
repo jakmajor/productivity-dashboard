@@ -17,6 +17,9 @@ const init = () => {
   const dayOfMonthTag = document.querySelector('#day-of-month');
   const monthTag = document.querySelector('#month');
   const holidayTag = document.querySelector('#holiday');
+  const tempFTag = document.querySelector('#f-temp');
+  const tempCTag = document.querySelector('#c-temp');
+
 
   const submitNewTaskHandler = (event) => {
     // prevent page refreshing
@@ -24,7 +27,7 @@ const init = () => {
 
     // create a div tag with the class of to-do-wrapper // parent tag
     // create a svg tag with the class of to-do-icon // children/siblings
-    //create a p tag with the class of to-do-text // children/siblings
+    // create a p tag with the class of to-do-text // children/siblings
     const toDoItemDiv = document.createElement("div");
     toDoItemDiv.className = "to-do-wrapper";
     toDoItemDiv.innerHTML = `<img src='./icons/not-checked.svg' class="to-do-icon"/> 
@@ -69,16 +72,32 @@ const init = () => {
   });
   
   // function to render weather info
-  const renderWeather = (weatherDataObj) => { 
-    
+  const renderWeather = (weatherDataObj) => {
+    // grab weather icon tag and set its src
     const weatherIconTag = document.querySelector('#weather-icon');
     weatherIconTag.src = `http:${weatherDataObj.current.condition.icon}`;
+
     // grab temperature tag and set its innerText
     const tempTag = document.querySelector("#temp");
     tempTag.innerText = Math.round(weatherDataObj.current.temp_f);
     
-    // save temperature condition into variable
-    // const tempCondition = weatherDataObj.current.condition.text;
+    // function to convert Celsius to Fahrenheit
+    const toggleCelsiusToFahrenheitHandler = () => {
+      tempCTag.classList.remove('active');
+      tempFTag.classList.add('active');
+      tempTag.innerText = Math.round(weatherDataObj.current.temp_f);
+    };
+
+    // function to convert Fahrenheit to Celsius
+    const toggleFahrenheitToCelsiusHandler = () => {
+      tempFTag.classList.remove('active');
+      tempCTag.classList.add('active');
+      tempTag.innerText = Math.round(weatherDataObj.current.temp_c);
+    };
+
+    // add event listeners to °F and °C
+    tempFTag.addEventListener('click', toggleCelsiusToFahrenheitHandler);
+    tempCTag.addEventListener('click', toggleFahrenheitToCelsiusHandler);
   };
 
   // fetch weather data when page first loads
