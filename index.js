@@ -33,12 +33,13 @@ const init = () => {
   const tempFTag = document.querySelector("#f-temp");
   const tempCTag = document.querySelector("#c-temp");
 
+  // function to submit a new task
   const submitNewTaskHandler = (event) => {
     // prevent page refreshing
     event.preventDefault();
 
     // create a div tag with the class of to-do-wrapper // parent tag
-    // create a svg tag with the class of to-do-icon // children/siblings
+    // create a img tag with the class of to-do-icon // children/siblings
     // create a p tag with the class of to-do-text // children/siblings
     const toDoItemDiv = document.createElement("div");
     toDoItemDiv.className = "to-do-wrapper";
@@ -55,11 +56,21 @@ const init = () => {
     createToDoInput.value = "";
   };
 
-  submitTaskFormTag.addEventListener("click", submitNewTaskHandler);
+  // add event listener on the form element to submit a new task
+  submitTaskFormTag.addEventListener("click", event => {
+    // submit new task only if submission if NOT empty
+    if (event.target.previousElementSibling.value !== '') {
+      submitNewTaskHandler(event);
+    }
+  });
  
-  // add event listener on the input tag, NOT the form tag
+  // add event listener on the text input box, NOT the form tag
   createToDoInput.addEventListener('keydown', event => {
-    if (event.key === 'Enter') {
+    // still don't know why keydown event needs default behavior to be prevented
+    event.preventDefault();
+    
+    // submit new task only if 'Enter' key is pressed and submission is NOT empty
+    if (event.key === 'Enter' && event.target.value !== '') {
       submitNewTaskHandler(event);
     }
   });
