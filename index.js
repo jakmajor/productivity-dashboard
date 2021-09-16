@@ -75,7 +75,7 @@ const init = () => {
     weatherIconTag.src = `http:${weatherDataObj.current.condition.icon}`;
     // grab temperature tag and set its innerText
     const tempTag = document.querySelector("#temp");
-    tempTag.innerText = Math.round(weatherDataObj.current.temp_f) + "°F";
+    tempTag.innerText = Math.round(weatherDataObj.current.temp_f);
     
     // save temperature condition into variable
     // const tempCondition = weatherDataObj.current.condition.text;

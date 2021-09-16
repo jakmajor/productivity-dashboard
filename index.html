@@ -26,7 +26,7 @@
     <div class="container-fluid big-bg">
       <div class="container widget">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 padd-me">
             <div class="dark-col" id="to-do-list-container">
               <p class="daily-tasks-header">DAILY TASKS</p>
               <div id="to-do-list"></div>
@@ -50,7 +50,14 @@
                 </div>
                 <div class="col-md-3" id="weather-container">
                   <img src="" alt="" id="weather-icon" />
-                  <p id="temp"></p>
+                  <div id="temp-wrapper">
+                    <p id="temp"></p>
+                    <div id="temp-toggle">
+                      <p id="f-temp" class="active temp-txt">°F</p>
+                      <div id="pipe">|</div>
+                      <p id="c-temp" class="temp-txt">°C</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row">
