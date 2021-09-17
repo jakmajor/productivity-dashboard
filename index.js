@@ -1,3 +1,5 @@
+const dailyTasksUrl = "http://localhost:3000/tasks";
+
 const weatherApiBaseUrl = "http://api.weatherapi.com/v1";
 const weatherApiKey = "29dea821b02e4088a1712806211409";
 const cityName = "San Francisco";
@@ -33,6 +35,54 @@ const init = () => {
   const tempFTag = document.querySelector("#f-temp");
   const tempCTag = document.querySelector("#c-temp");
 
+  // function to request server to update the completion status of a task
+  const updateTaskCompletionStatusToServer = (taskObj) => {
+    const configObj = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(taskObj)
+    };
+
+    // PATCH /tasks/:id
+    fetch(`${dailyTasksUrl}/${taskObj.id}`, configObj)
+      .then(response => response.json())
+      .then(json => console.log(json));
+  };
+
+  // function to render a single daily task that is persisting in db.json
+  const renderSingleTask = singleTaskObj => {
+    // create a div tag with the class of to-do-wrapper // parent tag
+    // create a img tag with the class of to-do-icon // children/siblings
+    // create a p tag with the class of to-do-text // children/siblings
+    const toDoItemDiv = document.createElement("div");
+    toDoItemDiv.className = "to-do-wrapper";
+    toDoItemDiv.innerHTML = `<img src='${singleTaskObj.image}' class="to-do-icon"/>
+                             <p class="to-do-text">${singleTaskObj.name}</p>`;
+    toDoListTag.appendChild(toDoItemDiv);
+
+    // change textDecoration of to-do-text based on if the task is checked off or not in db.json
+    if (singleTaskObj.image === './icons/checked.svg') {
+      toDoItemDiv.childNodes[2].style.textDecoration = "line-through";
+    }
+
+    toDoItemDiv.addEventListener("click", () => {
+      toDoItemDiv.childNodes[0].src = "./icons/checked.svg";
+      toDoItemDiv.childNodes[2].style.textDecoration = "line-through";
+      singleTaskObj.image = './icons/checked.svg';
+      updateTaskCompletionStatusToServer(singleTaskObj);
+    });
+  };
+
+  // fetch daily tasks that are persisting in db.json
+  fetch(dailyTasksUrl)
+    .then(response => response.json())
+    .then(json => {
+      json.forEach(taskObj => renderSingleTask(taskObj));
+    });
+
   // function to submit a new task
   const submitNewTaskHandler = (event) => {
     // prevent page refreshing
@@ -52,6 +102,35 @@ const init = () => {
       toDoItemDiv.childNodes[2].style.textDecoration = "line-through";
     });
 
+    // optimistic rendering: render in DOM first, then request server
+
+    // payload data
+    const formData = {
+      name: createToDoInput.value,
+      image: './icons/not-checked.svg'
+    };
+
+    // 2nd argument passing into the fetch method
+    const configObj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(formData)
+    };
+
+    // sending POST request to /tasks
+    fetch(dailyTasksUrl, configObj)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        toDoItemDiv.addEventListener('click', () => {
+          json.image = './icons/checked.svg';
+          updateTaskCompletionStatusToServer(json);
+        });
+      });
+
     // clear out user inputs
     createToDoInput.value = "";
   };
@@ -63,7 +142,7 @@ const init = () => {
       submitNewTaskHandler(event);
     }
   });
- 
+
   // add event listener on the text input box, NOT the form tag
   createToDoInput.addEventListener('keydown', event => {
     // submit new task only if 'Enter' key is pressed and submission is NOT empty
@@ -92,8 +171,7 @@ const init = () => {
   // Populate holiday
   // https://holidayapi.com/v1/holidays?pretty&key=92d100ea-4e77-4b45-b28a-682473508999&country=US&year=2020
   fetch(
-    `${holidayApiBaseUrl}?pretty&key=${holidayApiKey}&country=US&year=2020&month=${
-      date.getMonth() + 1
+    `${holidayApiBaseUrl}?pretty&key=${holidayApiKey}&country=US&year=2020&month=${date.getMonth() + 1
     }&day=${dayOfMonth}`
   )
     .then((response) => response.json())

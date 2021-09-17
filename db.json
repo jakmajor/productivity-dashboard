@@ -1,0 +1,44 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Feed and pet cats",
+      "image": "./icons/checked.svg"
+    },
+    {
+      "id": 2,
+      "name": "Book hair appointment",
+      "image": "./icons/checked.svg"
+    },
+    {
+      "id": 3,
+      "name": "Return library book",
+      "image": "./icons/checked.svg"
+    },
+    {
+      "name": "Clean dishes",
+      "image": "./icons/checked.svg",
+      "id": 4
+    },
+    {
+      "name": "Wash clothes",
+      "image": "./icons/checked.svg",
+      "id": 5
+    },
+    {
+      "name": "Exercise",
+      "image": "./icons/checked.svg",
+      "id": 6
+    },
+    {
+      "name": "Take shower",
+      "image": "./icons/checked.svg",
+      "id": 7
+    },
+    {
+      "name": "Do laundry",
+      "image": "./icons/checked.svg",
+      "id": 8
+    }
+  ]
+}
