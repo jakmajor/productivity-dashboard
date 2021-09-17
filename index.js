@@ -66,9 +66,6 @@ const init = () => {
  
   // add event listener on the text input box, NOT the form tag
   createToDoInput.addEventListener('keydown', event => {
-    // still don't know why keydown event needs default behavior to be prevented
-    event.preventDefault();
-    
     // submit new task only if 'Enter' key is pressed and submission is NOT empty
     if (event.key === 'Enter' && event.target.value !== '') {
       submitNewTaskHandler(event);
